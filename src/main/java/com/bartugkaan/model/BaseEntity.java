@@ -1,10 +1,14 @@
 package com.bartugkaan.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Getter
+@Setter
 // For Id and createTime superclass (Columns)
 @MappedSuperclass
 public class BaseEntity {
