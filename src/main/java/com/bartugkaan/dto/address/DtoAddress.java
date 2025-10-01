@@ -1,5 +1,6 @@
-package com.bartugkaan.dto;
+package com.bartugkaan.dto.address;
 
+import com.bartugkaan.dto.DtoBase;
 import lombok.Getter;
 import lombok.Setter;
 

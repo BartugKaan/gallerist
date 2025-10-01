@@ -1,4 +1,4 @@
-package com.bartugkaan.repository;
+package com.bartugkaan.repository.address;
 
 import com.bartugkaan.model.Address;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,16 +1,18 @@
 package com.bartugkaan.service.impl;
 
 
-import com.bartugkaan.dto.DtoAddress;
-import com.bartugkaan.dto.DtoAddressIU;
+import com.bartugkaan.dto.address.DtoAddress;
+import com.bartugkaan.dto.address.DtoAddressIU;
 import com.bartugkaan.model.Address;
-import com.bartugkaan.repository.AddressRepository;
-import com.bartugkaan.service.IAddressService;
+import com.bartugkaan.repository.address.AddressRepository;
+import com.bartugkaan.service.address.IAddressService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Service
 public class AddressServiceImpl implements IAddressService {
 
     @Autowired

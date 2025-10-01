@@ -1,6 +1,5 @@
-package com.bartugkaan.dto;
+package com.bartugkaan.dto.address;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
