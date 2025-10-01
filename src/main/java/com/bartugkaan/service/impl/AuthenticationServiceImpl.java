@@ -3,6 +3,7 @@ package com.bartugkaan.service.impl;
 import com.bartugkaan.dto.AuthRequest;
 import com.bartugkaan.dto.AuthResponse;
 import com.bartugkaan.dto.DtoUser;
+import com.bartugkaan.dto.RefreshTokenRequest;
 import com.bartugkaan.exception.BaseException;
 import com.bartugkaan.exception.ErrorMessage;
 import com.bartugkaan.exception.MessageType;
@@ -90,4 +91,27 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
             throw new BaseException(new ErrorMessage(MessageType.USERNAME_OR_PASSWORD_INVALID, ex.getMessage()));
         }
     }
+
+    public boolean isValidRefreshToken(Date expiredDate){
+        return new Date().before(expiredDate);
+    }
+
+    @Override
+    public AuthResponse refreshToken(RefreshTokenRequest input) {
+       Optional<RefreshToken> optRefreshToken = refreshTokenRepository.findByRefreshToken(input.getRefreshToken());
+       if(optRefreshToken.isEmpty()){
+            throw new BaseException(new ErrorMessage(MessageType.REFRESH_TOKEN_NOT_FOUND, input.getRefreshToken()));
+       }
+
+       if(!isValidRefreshToken(optRefreshToken.get().getExpiredDate())){
+           throw new BaseException(new ErrorMessage(MessageType.REFRESH_TOKEN_IS_EXPIRED, input.getRefreshToken()));
+       }
+
+       User user = optRefreshToken.get().getUser();
+       String accessToken = jwtService.generateToken(user);
+        RefreshToken savedRefreshToken = refreshTokenRepository.save(createRefreshToken(user));
+
+        return new AuthResponse(accessToken, savedRefreshToken.getRefreshToken());
+    }
+
 }
